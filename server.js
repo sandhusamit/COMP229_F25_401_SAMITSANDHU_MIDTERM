@@ -74,13 +74,19 @@ catch (error) {
 // Description: Filter games by genre
 // Task: Implement logic to return games matching the specified genre
 app.get('/api/games/filter', (req, res) => {
-  const {genre} = req.query; // Extract genre from query parameters URL
-  if(!genre)
-  {
-    return res.status(400).json({message: "Genre query parameter is required"});
+  const { genre } = req.query; // Extract genre from query parameters URL
+  if (!genre) {
+    return res.status(400).json({ message: "Genre query parameter is required" });
   }
-  const filteredGames = games.filter(game => game.genre.toLowerCase() === genre.toLowerCase()); //compare and only retrieve based on genre
+
+  const filteredGames = games.filter(game =>
+    game.genre.toLowerCase() === genre.toLowerCase()
+  );
+
+  // SEND THE RESPONSE
+  res.status(200).json(filteredGames);
 });
+
 
 // GET /api/games/:id
 // Description: Get a specific game by ID
